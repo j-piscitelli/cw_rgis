@@ -1,89 +1,84 @@
-# BIOSTATS Exam – Data Manipulation in R (using mtcars dataset)
+# Tidyverse Exam – Data Manipulation in R (using `mtcars` dataset)
 
 # tidyverse ---------------------------------------------------------------
 
-# 1. Filter rows where number of cylinders (cyl) is 6
-# Write code to create a new data frame that only includes rows where cyl == 6.
-# Assign to: mtcars_cyl6
+# Use `df_mtcars` for Questions 1 - 10
+library(tidyverse)
+df_mtcars <- as_tibble(mtcars,
+                       rownames = "model")
 
-# 2. Filter rows where number of gears (gear) is either 3 or 5
-# Use %in% to filter the mtcars dataset for these two gear values.
-# Assign to: mtcars_gear_3_5
+# 1. Filter rows where number of cylinders (`cyl`) is 6
+# Write code to create a new data frame that only includes rows where `cyl == 6`.
+# Assign to: `mtcars_cyl6`
 
-# 3. Filter rows where miles per gallon (mpg) is greater than 25
-# Create a subset of mtcars where mpg > 25.
-# Assign to: mtcars_mpg_gt25
+# 2. Filter rows where number of gears (`gear`) is either 3 or 5
+# Use `%in%` to filter the `df_mtcars` dataset for these two `gear` values.
+# Assign to: `mtcars_g35`
 
-# 4. Filter rows where weight (wt) is less than 2.5 and number of cylinders is 4
-# Combine logical conditions using &.
-# Assign to: mtcars_light_cyl4
+# 3. Filter rows where miles per gallon (`mpg`) is greater than 25
+# Create a subset of `df_mtcars` where `mpg > 25`.
+# Assign to: `mtcars_mpg25`
 
-# 5. Sort mtcars by horsepower (hp) in ascending order
-# Use arrange() to sort the data.
-# Assign to: mtcars_sorted_hp
+# 4. Filter rows where weight (`wt`) is less than 2.5 AND number of cylinders (`cyl`) is 4
+# Combine logical conditions using `&`.
+# Assign to: `mtcars_light_cyl4`
 
-# 6. Sort mtcars by quarter mile time (qsec) in descending order
-# Use desc() inside arrange().
-# Assign to: mtcars_sorted_qsec_desc
+# 5. Sort `df_mtcars` by horsepower (`hp`) in ascending order
+# Use `arrange()` to sort the data.
+# Assign to: `mtcars_hp`
 
-# 7. Select only mpg and cyl columns
-# Use select() to retain only the two columns.
-# Assign to: mtcars_mpg_cyl
+# 6. Sort `df_mtcars` by quarter mile time (`qsec`) in descending order
+# Use `desc()` inside `arrange()`.
+# Assign to: `mtcars_qsec`
 
-# 8. Exclude the drat column
-# Use select() with - to remove the column.
-# Assign to: mtcars_no_drat
+# 7. Exclude the `drat` column
+# Use `select()` with `-` (minus sign) to remove the column.
+# Assign to: `mtcars_no_drat`
 
-# 9. Select columns that start with "d"
-# Use starts_with() inside select().
-# Assign to: mtcars_d_columns
+# 8. Add a new column `ptw` that equals the ratio of horsepower (`hp`) to weight (`wt`) (`hp / wt`)
+# Use `mutate()` to add the new column.
+# Assign to: `mtcars_with_ptw`
 
-# 10. Add a new column power_to_weight = hp / wt
-# Use mutate() to add the new column.
-# Assign to: mtcars_with_ptw
+# 9. Identify the car `model` with the highest `ptw` among cars with six cylinders (`cyl == 6`).
+# Hint: Use `mtcars_with_ptw` and a chain of `filter()` and `arrange()` with `%>%`.
+# Write the car model here: YOUR ANSWER
 
-# 11. Filter for cars with 4 cylinders and select mpg (use piping)
-# Chain filter() and select() using %>%.
-# Assign to: mtcars_cyl4_mpg
-
-# 12. Group by number of gears and summarize mean mpg
-# Use group_by() and summarize() to calculate mean mpg.
-# Assign to: mtcars_mean_mpg_by_gear
-
-# 13. Add column mean_hp showing group mean of hp by gear, then ungroup
-# Use mutate() after group_by(), then ungroup().
-# Assign to: mtcars_with_mean_hp
-
-# 14. Reshape mtcars to wide format with an id column and mpg for each gear
-# Add id using mutate(row_number()) and use pivot_wider().
-# Assign to: mtcars_wide
-
-# 15. Reshape mtcars_wide back to long format with gear and mpg columns
-# Use pivot_longer() to convert back to long format.
-# Assign to: mtcars_long
+# 10. Group by number of gears (`gear`) and summarize minimum & maximum values of `mpg`
+# Use `group_by()` and `summarize()` to calculate minimum & maximum values of `mpg` within each group.
+# Minimum and maximum values of each group should be represented as separate columns.
+# Function `min()` returns the minimum value in a vector.
+# Function `max()` returns the maximum value in a vector.
+# Assign to: `mtcars_mpg_by_gear`
 
 # ggplot ------------------------------------------------------------------
 
-# Visualization in R (using iris dataset)
+# Visualization in R (using `iris` dataset)
 
-# 1. Simple scatter plot of Sepal.Length vs Sepal.Width using ggplot()
-# Assign to: plot_scatter
-# Write code to create a basic scatter plot with Sepal.Length on the y-axis and Sepal.Width on the x-axis.
+## before you begin with the following questions, type the following code to check column names in the dataframe
+colnames(iris) # output from this code is the column names that can be used in figures
 
-# 2. Scatter plot colored by Species
-# Assign to: plot_scatter_color
-# Write code to create a scatter plot with points colored by Species.
+# 11. Simple scatter plot of `Sepal.Length` vs `Sepal.Width` using `ggplot()`
+# Assign to: `g_scat`
+# Create a scatter plot with `Sepal.Width` on the x-axis and `Sepal.Length` on the y-axis.
 
-# 3. Histogram of Sepal.Width with binwidth = 0.5
-# Assign to: plot_histogram_binwidth
-# Write code to plot a histogram with binwidth set to 0.5.
+# 12. Scatter plot with points colored by `Species`
+# Assign to: `g_scat_col`
+# Create a scatter plot with `Petal.Width` on the x-axis and `Petal.Length` on the y-axis,
+# coloring points by `Species`.
 
-# Visualization in R (using PlantGrowth dataset)
-  
-# 4. Boxplot of weight grouped by group
-# Assign to: plot_pg_boxplot_basic
-# Write code to draw a boxplot of weight across different treatment groups in PlantGrowth.
+# 13. Histogram of `Petal.Width` with `binwidth = 0.5`
+# Assign to: `g_hist`
+# Create a histogram of `Petal.Width` with `binwidth` set to 0.5.
 
-# 5. Boxplot of weight grouped by group, filled by group
-# Assign to: plot_pg_boxplot_fill
-# Write code to draw a boxplot of weight grouped by group and filled by group.
+# Visualization in R (using `PlantGrowth` dataset)
+
+## before you begin with the following questions, type the following code to check column names in the dataframe
+colnames(PlantGrowth) # output from this code is the column names that can be used in figures
+
+# 14. Boxplot of `weight` grouped and filled by `group`
+# Assign to: `g_bplot1`
+# Create a boxplot of `weight` by `group`, filling boxes by `group`.
+
+# 15. Boxplot + scatter plot of `weight` by `group`
+# Assign to: `g_bplot2`
+# Create a boxplot of `weight` by `group`, then overlay points showing individual observations.
