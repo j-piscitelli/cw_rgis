@@ -9,25 +9,25 @@ library(here)
 # read a shapefile (e.g., ESRI Shapefile format)
 # `quiet = TRUE` just for cleaner output
 # for .shp, no need to call .dbf etc.
-(sf_nc_county <- st_read(here::here(dsn = "data/nc.shp",
-                         quiet = TRUE)))
+(sf_nc_county <- st_read(dsn = here("data/nc.shp"),
+                         quiet = TRUE))
 
 # write to .shp and .gpkg
 # 'append = FALSE' means the file will overwrite any previous file with that
 # name, rather than add data points to it.
-st_write(here::here(sf_nc_county,
-         dsn = "data/sf_nc_county.shp",
-         append = FALSE))
-st_write(here::here(sf_nc_county,
-         dsn = "data/sf_nc_county.gpkg",
-         append = FALSE))
+st_write(sf_nc_county,
+         dsn = here("data/sf_nc_county.shp"),
+         append = FALSE)
+st_write(sf_nc_county,
+         dsn = here("data/sf_nc_county.gpkg"),
+         append = FALSE)
 
 # save as .rds (not compatible with non-R software)
-saveRDS(here::here(sf_nc_county,
-        file = "data/sf_nc_county.rds"))
+saveRDS(sf_nc_county,
+        file = here("data/sf_nc_county.rds"))
 
 # read a saved .rds file
-sf_nc_county <- readRDS(here::here(file = "data/sf_nc_county.rds"))
+sf_nc_county <- readRDS(file = here("data/sf_nc_county.rds"))
 
 
 # Points ------------------------------------------------------------------
@@ -102,7 +102,7 @@ ggplot() +
 # Exercise ----------------------------------------------------------------
 
 # Read stream line data for Ashe County
-sf_str_as <- readRDS(here::here(file = "data/sf_stream_as.rds"))
+sf_str_as <- readRDS(file = here("data/sf_stream_as.rds"))
 
 # Confirm that the CRS matches the county data set
 print(sf_str_as) # CRS is WGS 84
